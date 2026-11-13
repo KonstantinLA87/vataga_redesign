@@ -70,11 +70,53 @@ const orderColumns = [
 </template>
 
 <style scoped>
-.layout { display: flex; gap: var(--space-6); }
-.content { flex: 1; min-width: 0; padding: 32px var(--space-6) var(--space-6) 24px; display: flex; flex-direction: column; gap: var(--space-4); }
-.top-row { display: flex; gap: var(--content-gap); }
-.top-row__pnl { width: 372px; flex-shrink: 0; }
-.section-head { display: flex; justify-content: space-between; align-items: center; margin: 14px 0 0; }
-.section-head h2 { margin: 0; font-size: var(--fs-xl); font-weight: 600; }
-.deals { display: flex; align-items: center; gap: 10px; font-size: var(--fs-lg); padding-right: 8px; }
+.layout {
+    display: flex;
+    gap: var(--space-6);
+}
+.content {
+    flex: 1;
+    min-width: 0;
+    padding: 28px var(--space-6) var(--space-6) 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+.top-row {
+    display: flex;
+    gap: var(--space-4);
+}
+.top-row__pnl {
+    width: 320px;
+    flex-shrink: 0;
+}
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0 0;
+}
+.section-head h2 {
+    margin: 0;
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.deals {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+}
+.deals:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+}
 </style>

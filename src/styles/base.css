@@ -1,59 +1,119 @@
-*, *::before, *::after { box-sizing: border-box; }
-
-html, body { margin: 0; padding: 0; }
-
-body {
-  font-family: var(--font-family);
-  font-size: var(--fs-md);
-  color: var(--text-primary);
-  background: #0b0f1a;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
-input { font: inherit; color: inherit; }
-a { color: var(--accent); text-decoration: none; }
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--fs-md);
+    color: var(--text-primary);
+    background:
+        radial-gradient(1200px 600px at 70% -10%, rgba(135, 62, 254, 0.08), transparent 60%),
+        var(--bg-page);
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    /* Цифры одинаковой ширины: цены в колонках не «прыгают» */
+    font-variant-numeric: tabular-nums;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    border: 0;
+    background: none;
+}
+input {
+    font: inherit;
+    color: inherit;
+}
+a {
+    color: var(--accent-hover);
+    text-decoration: none;
+}
 
 .card {
-  background: #131523;
-  border-radius: 6px;
-  border: 1px solid #3f4257;
-  box-shadow: 0px 4px 10px #00000026;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: #fff;
-  font-size: var(--fs-md);
-  padding: 10px 14px;
-  border-radius: var(--radius-sm);
-  transition: background .15s;
+    background: var(--accent);
+    color: #fff;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    height: 34px;
+    padding: 0 14px;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s, box-shadow 0.15s;
 }
-.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary:hover {
+    background: var(--accent-hover);
+}
+.btn-primary:focus-visible {
+    box-shadow: var(--focus-ring);
+    outline: none;
+}
 
 .btn-ghost {
-  background: var(--bg-elevated);
-  color: var(--text-primary);
-  font-size: var(--fs-md);
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  transition: background .15s;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
-.btn-ghost:hover { background: var(--bg-elevated-hover); }
+.btn-ghost:hover {
+    background: var(--danger-soft);
+    border-color: transparent;
+    color: var(--danger-text);
+}
 
+/* Бейджи: мягкая заливка + цветной текст вместо ярких плашек */
 .badge {
-  display: inline-block;
-  font-size: var(--fs-md);
-  padding: 2px 9px;
-  border-radius: var(--radius-pill);
-  color: #fff;
-  line-height: 1.4;
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0 8px;
+    border-radius: 6px;
 }
-.badge--long { background: var(--success); }
-.badge--short, .badge--sell { background: var(--danger); }
-.badge--lev { background: var(--bg-elevated); color: var(--text-secondary); border-radius: var(--radius-sm); }
+.badge--long {
+    background: var(--success-soft);
+    color: var(--success-text);
+}
+.badge--short,
+.badge--sell {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+}
+.badge--lev {
+    background: var(--accent-soft);
+    color: var(--accent-hover);
+    margin-left: 6px;
+}
 
-.pos { color: var(--success-text); }
-.neg { color: var(--danger-text); }
-.muted { color: var(--text-muted); }
+.pos {
+    color: var(--success-text);
+}
+.neg {
+    color: var(--danger-text);
+}
+.muted {
+    color: var(--text-muted);
+}

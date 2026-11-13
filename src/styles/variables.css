@@ -1,64 +1,73 @@
 /*
  * ВСЕ ДИЗАЙН-ТОКЕНЫ ЗДЕСЬ.
- * Меняй значения ниже, и вся страница перекрасится.
+ * Редизайн: глубокий тёмно-синий фон, карточки отделяются тонкой рамкой,
+ * один фирменный акцент (фиолетовый из логотипа), зелёный и красный только для денег.
  */
 :root {
-  /* Фон */
-  --bg-page-top: #1b1b24;
-  --bg-page-bottom: #0e0d16;
-  --bg-header: #17171f;
-  --bg-card: #262631;          /* большие карточки (PnL, переводы, таблицы) */
-  --bg-card-sidebar: #22222c;  /* карточки в сайдбаре */
-  --bg-elevated: #30303c;      /* инпуты, табы, бейджи плеча, кнопка «Закрыть» */
-  --bg-elevated-hover: #3a3a48;
-  --bg-nav-active: #262631;
+    /* Фон и поверхности */
+    --bg-page: #0b0f1a;
+    --bg-header: rgba(11, 15, 26, 0.82);
+    --bg-card: #121624; /* большие карточки (PnL, переводы, таблицы) */
+    --bg-card-sidebar: #121624; /* карточки в сайдбаре */
+    --bg-elevated: #1a1f31; /* инпуты, табы, чипы, вторичные кнопки */
+    --bg-elevated-hover: #22283d;
+    --bg-nav-active: rgba(135, 62, 254, 0.12);
+    --bg-row-hover: rgba(255, 255, 255, 0.025);
 
-  /* Текст */
-  --text-primary: #ffffff;
-  --text-secondary: #c9c9d3;
-  --text-muted: #8e8e9c;
-  --text-placeholder: #6c6c7a;
+    /* Текст */
+    --text-primary: #eef0f6;
+    --text-secondary: #a6adc2;
+    --text-muted: #6b7390;
+    --text-placeholder: #4f5670;
 
-  /* Акценты */
-  --accent: #3a86f7;
-  --accent-hover: #4f94fa;
-  --accent-muted: #4a6fa8;     /* неактивная кнопка «Перевести» */
-  --success: #3fbf6a;
-  --success-text: #4fd17a;
-  --danger: #e5484d;
-  --danger-text: #f2555a;
-  --brand-team: #ff4d6d;
-  --brand-logo: #7c5cff;
+    /* Акцент (бренд) */
+    --accent: #873efe; /* цвет из логотипа */
+    --accent-hover: #9a5cff;
+    --accent-soft: rgba(135, 62, 254, 0.14);
+    --accent-muted: rgba(135, 62, 254, 0.35); /* неактивная кнопка «Перевести» */
+    --focus-ring: 0 0 0 3px rgba(135, 62, 254, 0.25);
 
-  /* Границы */
-  --border: #2c2c38;
-  --border-strong: #3a3a48;
+    /* Деньги */
+    --success: #1fc77e;
+    --success-text: #2ed68b;
+    --success-soft: rgba(31, 199, 126, 0.12);
+    --danger: #f2495c;
+    --danger-text: #ff5d6f;
+    --danger-soft: rgba(242, 73, 92, 0.12);
 
-  /* Скругления */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 18px;
-  --radius-pill: 999px;
+    --brand-team: #ff5c8a;
+    --brand-logo: #873efe;
 
-  /* Отступы */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
+    /* Границы и тени */
+    --border: #20263a;
+    --border-strong: #2c334b;
+    --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 8px 24px rgba(0, 0, 0, 0.25);
 
-  /* Размеры раскладки */
-  --header-height: 58px;
-  --sidebar-width: 246px;
-  --content-gap: 24px;
+    /* Скругления */
+    --radius-sm: 8px;
+    --radius-md: 10px;
+    --radius-lg: 10px; /* основные карточки */
+    --radius-pill: 999px;
 
-  /* Шрифт */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-  --fs-xs: 11px;
-  --fs-sm: 13px;
-  --fs-md: 15px;
-  --fs-lg: 16px;
-  --fs-xl: 19px;
-  --fs-pnl: 28px;
+    /* Отступы */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+
+    /* Размеры раскладки */
+    --header-height: 58px;
+    --sidebar-width: 246px;
+    --content-gap: 24px;
+
+    /* Шрифт */
+    --font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    --fs-xs: 11px;
+    --fs-sm: 13px;
+    --fs-md: 14px;
+    --fs-lg: 15px;
+    --fs-xl: 18px;
+    --fs-pnl: 30px;
 }

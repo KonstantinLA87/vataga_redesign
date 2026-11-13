@@ -74,7 +74,7 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    padding: var(--space-4) 0 var(--space-5) var(--space-4);
+    padding: var(--space-6) 0 var(--space-5) var(--space-4);
     position: sticky;
     top: var(--header-height);
     height: calc(100vh - var(--header-height));
@@ -90,10 +90,12 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
 
 .promo {
     position: relative;
-    padding: 10px 14px;
+    padding: 12px 14px;
     border-radius: var(--radius-md);
-    border: 1.5px solid #ff4d8d;
-    background: linear-gradient(110deg, #1d1030 0%, #3a1450 60%, #6a1f6e 100%);
+    border: 1px solid rgba(135, 62, 254, 0.35);
+    background:
+        radial-gradient(140% 120% at 100% 100%, rgba(135, 62, 254, 0.35), transparent 60%),
+        var(--bg-card);
     overflow: hidden;
 }
 .promo__close {
@@ -103,9 +105,13 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #0008;
+    color: var(--text-muted);
     display: grid;
     place-items: center;
+}
+.promo__close:hover {
+    color: var(--text-primary);
+    background: var(--bg-elevated);
 }
 .promo__title {
     font-weight: 600;
@@ -114,26 +120,28 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
 .promo__text {
     font-size: var(--fs-xs);
     color: var(--text-secondary);
-    margin: 3px 0;
+    margin: 3px 0 6px;
 }
 .promo__link {
     font-size: var(--fs-xs);
-    color: var(--text-primary);
+    font-weight: 600;
+    color: var(--accent-hover);
 }
 .promo__okx {
     position: absolute;
-    right: 8px;
-    bottom: 6px;
+    right: 12px;
+    bottom: 8px;
     font-weight: 800;
-    font-size: 20px;
+    font-size: 16px;
     letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .side-card {
-    background: #131523;
-    border-radius: 6px;
-    border: 1px solid #3f4257;
-    padding: var(--space-3);
+    background: var(--bg-card-sidebar);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
 }
 .side-card--flush {
     padding: 0;
@@ -144,20 +152,27 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     align-items: center;
     gap: 10px;
     width: 100%;
-    padding: 10px;
+    height: 38px;
+    padding: 0 10px;
     border-radius: var(--radius-sm);
     font-size: var(--fs-sm);
     color: var(--text-muted);
+    transition: background 0.15s, color 0.15s;
+}
+.exchange:hover {
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
 }
 .exchange--active {
     background: var(--bg-elevated);
     color: var(--text-primary);
     font-weight: 600;
+    box-shadow: inset 0 0 0 1px var(--border-strong);
 }
 .exchange__icon {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
 }
 .exchange__icon--binance {
     background: radial-gradient(circle, #f3ba2f 35%, #2b2b2b 36%);
@@ -170,32 +185,42 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     display: flex;
     align-items: center;
     gap: 8px;
+    width: 100%;
+    height: 34px;
     font-size: var(--fs-sm);
     color: var(--text-muted);
-    padding: 10px var(--space-3);
+    padding: 0 10px;
+    border-radius: var(--radius-sm);
+}
+.add-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-elevated);
 }
 
 .balances {
-    padding: var(--space-3);
+    padding: var(--space-3) var(--space-3) var(--space-2);
 }
 .balances--divided {
     border-top: 1px solid var(--border);
 }
 .balances__title {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-xs);
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
     margin-bottom: 6px;
 }
 .balance {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-size: var(--fs-sm);
-    height: 25px;
+    height: 26px;
 }
 .coin {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     flex-shrink: 0;
 }
@@ -210,6 +235,7 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     display: inline-block;
     margin-top: 6px;
     font-size: var(--fs-xs);
+    font-weight: 500;
 }
 
 .menu {
@@ -223,25 +249,38 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px var(--space-4) 10px 36px;
-    color: var(--text-primary);
-    font-size: var(--fs-sm);
+    height: 40px;
+    padding: 0 var(--space-3);
+    color: var(--text-secondary);
+    font-size: var(--fs-md);
+    font-weight: 500;
     border-radius: var(--radius-sm);
+    transition: background 0.15s, color 0.15s;
+}
+.menu__item :deep(svg) {
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
 }
 .menu__item:hover {
-    background: var(--bg-nav-active);
+    background: var(--bg-elevated);
+    color: var(--text-primary);
 }
 .menu__item--active {
     background: var(--bg-nav-active);
+    color: var(--text-primary);
+}
+.menu__item--active :deep(svg) {
+    color: var(--accent-hover);
 }
 .menu__item--active::before {
     content: "";
     position: absolute;
-    left: 0;
-    top: 8px;
-    bottom: 8px;
-    width: 4px;
-    border-radius: 2px;
+    left: -16px;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
     background: var(--accent);
 }
 
@@ -253,31 +292,41 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
 }
 .subscribe__title {
     font-weight: 700;
-    font-size: var(--fs-lg);
+    font-size: var(--fs-md);
 }
 .subscribe__text {
     font-size: var(--fs-sm);
     color: var(--text-secondary);
     line-height: 1.45;
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
 }
 .social-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 10px;
+    height: 36px;
     border-radius: var(--radius-sm);
-    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
     color: var(--text-primary);
-    font-size: var(--fs-md);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    transition: background 0.15s, border-color 0.15s;
 }
 .social-btn:hover {
-    background: var(--bg-elevated-hover);
+    background: var(--bg-elevated);
+    border-color: var(--accent-muted);
 }
 
 .logout {
     margin-top: var(--space-2);
-    color: var(--text-secondary);
+    color: var(--text-muted);
+}
+.logout:hover {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+}
+.logout:hover :deep(svg) {
+    color: var(--danger-text);
 }
 </style>
