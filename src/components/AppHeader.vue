@@ -48,8 +48,8 @@ const icons = ["chat", "help", "download", "globe", "settings"];
 }
 .logo__img {
     display: block;
-    height: 26px;
-    width: auto;
+    width: 160px; /* было ~180px; высота подстраивается пропорционально (~23px) */
+    height: auto;
 }
 .nav {
     display: flex;

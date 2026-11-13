@@ -24,6 +24,11 @@ const paths = {
   key: 'M15 7a4 4 0 1 1-1 7.9L5 21l-2-2 6.1-9A4 4 0 0 1 15 7zM7 17l2 2',
   telegram: 'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z',
   discord: 'M8 12h.01M16 12h.01M7.5 7.5c3-1 6-1 9 0M7 16.5c3 1.3 7 1.3 10 0M15.5 17l1 2c2-.6 3.8-1.6 5-3 0-4-1-8-3-11a16 16 0 0 0-4-1l-.5 1M8.5 17l-1 2c-2-.6-3.8-1.6-5-3 0-4 1-8 3-11a16 16 0 0 1 4-1l.5 1',
+  palette: 'M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-2a2 2 0 0 0-1.5 3.3A1.6 1.6 0 0 1 12 22zM7.5 10.5h.01M10.5 7h.01M15 7.5h.01M17 11h.01',
+  check: 'M20 6 9 17l-5-5',
+  share: 'M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v13',
+  reset: 'M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5',
+  copy: 'M9 9h11v11H9zM5 15H4V4h11v1',
   logout: 'M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9',
 }
 </script>
@@ -31,6 +36,10 @@ const paths = {
 <template>
   <svg :width="props.size" :height="props.size" viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path :d="paths[props.name]" />
+    <!-- «Три точки» кружками: так они ровно по центру, у штрихов h.01 центр плывёт -->
+    <g v-if="props.name === 'more'" fill="currentColor" stroke="none">
+      <circle cx="5" cy="12" r="1.7" /><circle cx="12" cy="12" r="1.7" /><circle cx="19" cy="12" r="1.7" />
+    </g>
+    <path v-else :d="paths[props.name]" />
   </svg>
 </template>

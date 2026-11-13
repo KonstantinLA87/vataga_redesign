@@ -38,3 +38,6 @@ export const orders = [
   { created: '13.11.2026 02:03', symbol: 'ONEUSDT', type: 'TAKE_PROFIT_MARKET', side: 'Sell', mode: 'Кросс', price: 'MARKET', stop: '0.001797', size: '0' },
   { created: '11.11.2026 21:32', symbol: 'INITUSDT', type: 'TAKE_PROFIT_MARKET', side: 'Sell', mode: 'Кросс', price: 'MARKET', stop: '0.24525', size: '0' },
 ]
+
+// Накопленный PnL в течение дня (для мини-графика в «Поделиться PnL»)
+export const pnlIntraday = [0, -2.1, 1.4, 3.2, 2.3, 5.1, 4.2, 7.6, 6.1, 9.4, 8.5, 11.3]
