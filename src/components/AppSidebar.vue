@@ -1,6 +1,12 @@
 <script setup>
 import Icon from "./Icon.vue";
 import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock.js";
+import { coinIcon, hideBrokenIcon } from "../utils/coinIcon.js";
+import binanceIcon from "../assets/img/binance-link.svg";
+import bybitIcon from "../assets/img/bybit-uta.svg";
+
+// Иконки бирж по ключу icon из mock.js
+const exchangeIcons = { binance: binanceIcon, bybit: bybitIcon };
 </script>
 
 <template>
@@ -17,7 +23,7 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
         <!-- Биржи -->
         <div class="side-card">
             <button v-for="e in exchanges" :key="e.name" class="exchange" :class="{ 'exchange--active': e.active }">
-                <span class="exchange__icon" :class="'exchange__icon--' + e.icon"></span>
+                <img class="exchange__icon" :src="exchangeIcons[e.icon]" alt="" />
                 {{ e.name }}
             </button>
         </div>
@@ -31,7 +37,7 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
             <div class="balances">
                 <div class="balances__title">Фьючерсный счет</div>
                 <div v-for="b in futuresBalances" :key="b.coin" class="balance">
-                    <span class="coin" :style="{ background: b.color }"></span>
+                    <span class="coin" :style="{ background: b.color }"><img :src="coinIcon(b.coin)" :alt="b.coin" @error="hideBrokenIcon" /></span>
                     <span class="balance__amount">{{ b.amount }}</span>
                     <span class="balance__coin">{{ b.coin }}</span>
                 </div>
@@ -39,7 +45,7 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
             <div class="balances balances--divided">
                 <div class="balances__title">Спотовый счет</div>
                 <div v-for="b in spotBalances" :key="b.coin" class="balance">
-                    <span class="coin" :style="{ background: b.color }"></span>
+                    <span class="coin" :style="{ background: b.color }"><img :src="coinIcon(b.coin)" :alt="b.coin" @error="hideBrokenIcon" /></span>
                     <span class="balance__amount">{{ b.amount }}</span>
                     <span class="balance__coin">{{ b.coin }}</span>
                 </div>
@@ -179,15 +185,10 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     box-shadow: inset 0 0 0 1px var(--border-strong);
 }
 .exchange__icon {
+    display: block;
     width: 20px;
     height: 20px;
-    border-radius: 6px;
-}
-.exchange__icon--binance {
-    background: radial-gradient(circle, #f3ba2f 35%, #2b2b2b 36%);
-}
-.exchange__icon--bybit {
-    background: #f7a600;
+    flex-shrink: 0;
 }
 
 .add-btn {
@@ -228,10 +229,16 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     height: 26px;
 }
 .coin {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     flex-shrink: 0;
+    overflow: hidden;
+}
+.coin img {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 .balance__amount {
     flex: 1;

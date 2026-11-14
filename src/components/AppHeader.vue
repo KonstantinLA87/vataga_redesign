@@ -72,7 +72,7 @@ onUnmounted(() => {
             </button>
 
             <Tooltip text="Поддержка" placement="bottom">
-                <button class="icon-btn" aria-label="Написать в поддержку"><Icon name="chat" :size="24" /></button>
+                <button class="icon-btn" aria-label="Написать в поддержку"><Icon name="chats" :size="24" /></button>
             </Tooltip>
 
             <!-- Шестерёнка: всё редкое -->
@@ -109,7 +109,7 @@ onUnmounted(() => {
                             <Icon name="chevronRight" :size="14" class="menu__arrow" />
                         </a>
                         <a href="#" class="menu__item" role="menuitem" @click.prevent="closeMenu">
-                            <Icon name="chat" :size="16" /> Написать в поддержку
+                            <Icon name="chats" :size="16" /> Написать в поддержку
                         </a>
                     </div>
                 </Transition>
@@ -198,13 +198,13 @@ onUnmounted(() => {
     position: absolute;
     top: 3px;
     right: 1px;
-    min-width: 18px;
+    min-width: 16px;
     background: var(--danger);
     color: #fff;
     font-size: 9px;
     font-weight: 700;
-    line-height: 14px;
-    padding: 0 4px;
+    line-height: 13px; /* поля вокруг цифр на 1px меньше */
+    padding: 0 3px;
     border-radius: var(--radius-pill);
     box-shadow: 0 0 0 2px var(--bg-page);
 }

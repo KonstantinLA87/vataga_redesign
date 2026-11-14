@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Icon from './Icon.vue'
+import { coinIcon, hideBrokenIcon } from '../utils/coinIcon.js'
 
 const tabs = ['Внутренние переводы', 'Межбиржевые переводы', 'Обмен на споте']
 const activeTab = ref(0)
@@ -36,7 +37,7 @@ const percents = ['10%', '25%', '50%', '75%', '100%']
           <div class="input">
             <input v-model="amount" placeholder="Сумма" />
             <button class="coin-select">
-              <span class="coin-dot"></span> USDT <Icon name="chevron" :size="16" />
+              <span class="coin-dot"><img :src="coinIcon('USDT')" alt="USDT" @error="hideBrokenIcon" /></span> USDT <Icon name="chevron" :size="16" />
             </button>
           </div>
           <button class="btn-transfer" :disabled="!amount">Перевести</button>
@@ -186,6 +187,13 @@ const percents = ['10%', '25%', '50%', '75%', '100%']
     height: 16px;
     border-radius: 50%;
     background: #26a17b;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.coin-dot img {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 .btn-transfer {
     background: var(--accent);
