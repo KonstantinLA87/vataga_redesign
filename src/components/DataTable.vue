@@ -70,7 +70,7 @@ th {
     white-space: nowrap;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.015);
+    background: var(--bg-table-head);
 }
 th:first-child,
 td:first-child {

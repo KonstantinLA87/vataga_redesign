@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Ставим тему до загрузки приложения, чтобы не было вспышки тёмного фона
+      try { if (localStorage.getItem("vataga.theme") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}
+    </script>
     <title>Vataga Crypto — Фьючерсы</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />

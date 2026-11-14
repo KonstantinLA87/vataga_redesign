@@ -1,6 +1,13 @@
 <script setup>
 import Icon from "./Icon.vue";
-import logo from "../assets/img/logo-dark.svg";
+import Tooltip from "./Tooltip.vue";
+import { computed } from "vue";
+import logoDark from "../assets/img/logo-dark.svg";
+import logoLight from "../assets/img/logo-light.svg";
+import { useTheme } from "../composables/useTheme.js";
+
+const { theme, toggle } = useTheme();
+const logo = computed(() => (theme.value === "light" ? logoLight : logoDark));
 const links = ["Риск-менеджер", "Транзакции", "Терминал"];
 const icons = ["chat", "help", "download", "globe", "settings"];
 </script>
@@ -19,6 +26,11 @@ const icons = ["chat", "help", "download", "globe", "settings"];
                 <span class="counter">460</span>
             </button>
             <button v-for="i in icons" :key="i" class="icon-btn"><Icon :name="i" :size="24" /></button>
+            <Tooltip :text="theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'" placement="bottom">
+                <button class="icon-btn theme-btn" :aria-label="theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему'" @click="toggle">
+                    <Icon :name="theme === 'dark' ? 'sun' : 'moon'" :size="24" />
+                </button>
+            </Tooltip>
         </nav>
     </header>
 </template>
@@ -78,7 +90,7 @@ const icons = ["chat", "help", "download", "globe", "settings"];
     margin: 0 10px 0 6px;
     border: 1px solid rgba(255, 92, 138, 0.35);
     border-radius: var(--radius-pill);
-    background: rgba(255, 92, 138, 0.08);
+    background: var(--team-bg);
 }
 .icon-btn {
     position: relative;

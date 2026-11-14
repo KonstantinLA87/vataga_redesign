@@ -89,6 +89,15 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
 }
 
 .promo {
+    /* Рекламная плашка всегда тёмная, в любой теме: фиксируем тёмные значения токенов внутри неё */
+    --bg-card: #121624;
+    --bg-elevated: #1a1f31;
+    --text-primary: #eef0f6;
+    --text-secondary: #a6adc2;
+    --text-muted: #6b7390;
+    --accent-hover: #9a5cff;
+    color-scheme: dark;
+    color: var(--text-primary);
     position: relative;
     padding: 12px 14px;
     border-radius: var(--radius-md);
@@ -134,7 +143,7 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     font-weight: 800;
     font-size: 16px;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-primary);
 }
 
 .side-card {
