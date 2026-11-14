@@ -165,7 +165,7 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
     background: var(--bg-elevated);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-md);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    box-shadow: var(--shadow-pop);
 }
 .menu__item {
     display: flex;
@@ -244,11 +244,12 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
     border-radius: 0;
 }
 .pnl--minimal .pnl__value {
-    font-size: var(--fs-pnl);
+    font-size: 36px; /* +20% к --fs-pnl (30px) */
     letter-spacing: -0.02em;
     margin-top: 10px;
 }
 .pnl--minimal .pnl__unr {
+    font-size: 13px; /* +20% к --fs-xs (11px) */
     align-self: flex-start;
     margin-top: 6px;
     padding: 3px 8px;
