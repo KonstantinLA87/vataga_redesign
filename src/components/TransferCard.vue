@@ -52,7 +52,7 @@ const percents = ['10%', '25%', '50%', '75%', '100%']
 
 <style scoped>
 .transfer {
-    padding: var(--space-5);
+    padding: var(--card-padding);
     flex: 1;
 }
 

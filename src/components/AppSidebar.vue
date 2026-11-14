@@ -74,7 +74,7 @@ import { exchanges, futuresBalances, spotBalances, navItems } from "../data/mock
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    padding: var(--space-6) 0 var(--space-5) var(--space-4);
+    padding: 28px 0 var(--space-5) var(--space-4);
     position: sticky;
     top: var(--header-height);
     height: calc(100vh - var(--header-height));

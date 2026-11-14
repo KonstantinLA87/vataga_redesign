@@ -17,6 +17,24 @@ const emit = defineEmits(["close"]);
 
 const canvas = ref(null);
 const includeUnrealized = ref(false);
+
+/* Стиль картинки: переключатель сверху, выбор запоминается */
+const styles = [
+    { id: "vivid", label: "Сочный" },
+    { id: "accent", label: "Акцент" },
+];
+const STYLE_KEY = "vataga.shareStyle";
+let saved = "vivid";
+try {
+    saved = localStorage.getItem(STYLE_KEY) || "vivid";
+    if (!["vivid", "accent"].includes(saved)) saved = "vivid";
+} catch {}
+const style = ref(saved);
+watch(style, (v) => {
+    try {
+        localStorage.setItem(STYLE_KEY, v);
+    } catch {}
+});
 const status = ref(""); // '' | 'copied' | 'downloaded' | 'error'
 
 const value = computed(() => props.realized + (includeUnrealized.value ? props.unrealized : 0));
@@ -40,6 +58,7 @@ async function render() {
         series: pnlIntraday.map((v) => v * k),
         account: "Binance Link",
         market: "USDⓈ-M Futures",
+        style: style.value,
         ...dateInfo(),
     });
 }
@@ -53,7 +72,7 @@ watch(
         render();
     },
 );
-watch(includeUnrealized, () => {
+watch([includeUnrealized, style], () => {
     status.value = "";
     render();
 });
@@ -103,6 +122,20 @@ onUnmounted(() => document.removeEventListener("keydown", onKey));
                     <div class="modal__head">
                         <h3 id="share-title">Поделиться PnL</h3>
                         <button class="modal__close" aria-label="Закрыть" @click="emit('close')"><Icon name="close" :size="16" /></button>
+                    </div>
+
+                    <div class="seg" role="tablist" aria-label="Стиль картинки">
+                        <button
+                            v-for="st in styles"
+                            :key="st.id"
+                            class="seg__btn"
+                            :class="{ 'seg__btn--on': style === st.id }"
+                            role="tab"
+                            :aria-selected="style === st.id"
+                            @click="style = st.id"
+                        >
+                            {{ st.label }}
+                        </button>
                     </div>
 
                     <div class="preview">
@@ -175,11 +208,40 @@ onUnmounted(() => document.removeEventListener("keydown", onKey));
     color: var(--text-primary);
 }
 
+/* Переключатель стиля — как табы «Внутренние / Межбиржевые переводы» */
+.seg {
+    display: flex;
+    width: fit-content;
+    gap: 2px;
+    padding: 3px;
+    margin: 0 auto var(--space-4);
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+.seg__btn {
+    height: 30px;
+    padding: 0 16px;
+    border-radius: 7px;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: background 0.15s, color 0.15s;
+}
+.seg__btn:hover {
+    color: var(--text-primary);
+}
+.seg__btn--on {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 .preview {
     border-radius: var(--radius-md);
     overflow: hidden;
     border: 1px solid var(--border);
-    box-shadow: 0 20px 60px -20px rgba(135, 62, 254, 0.45);
+  
 }
 .preview__canvas {
     display: block;

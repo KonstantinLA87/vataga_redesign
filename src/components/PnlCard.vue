@@ -75,13 +75,9 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
         </button>
         <Transition name="pop">
           <div v-if="menuOpen" class="menu" role="menu">
-            <button class="menu__item" role="menuitem" @click="openShare">
-              <Icon name="share" :size="16" /> Поделиться
-            </button>
             <button class="menu__item" role="menuitem" @click="resetPnl">
               <Icon name="reset" :size="16" /> Сбросить
             </button>
-            <div class="menu__sep"></div>
             <button class="menu__item" role="menuitem" @click="openPresetModal">
               <Icon name="palette" :size="16" /> Сменить пресет
             </button>
@@ -92,6 +88,15 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
     <div class="pnl__body">
       <div class="pnl__value" :class="isUp ? 'pos' : 'neg'">{{ isUp ? '+' : '' }}{{ value }}</div>
       <div class="pnl__unr neg">{{ pnl.unrealized }} Unr.</div>
+    </div>
+
+    <!-- «Поделиться»: всегда на виду, правый нижний угол -->
+    <div class="share-wrap">
+      <Tooltip text="Поделиться">
+        <button class="share-btn" aria-label="Поделиться" @click="openShare">
+          <Icon name="share" :size="16" />
+        </button>
+      </Tooltip>
     </div>
 
     <!-- Модалка телепортируется в body, здесь только чтобы у компонента был один корень -->
@@ -177,10 +182,36 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
 .menu__item :deep(svg) {
     color: var(--text-muted);
 }
-.menu__sep {
-    height: 1px;
-    margin: 4px 6px;
-    background: var(--border-strong);
+/* Кнопка «Поделиться» в правом нижнем углу: квадрат с обводкой */
+.share-wrap {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    z-index: 2;
+}
+.pnl--minimal .share-wrap {
+    right: 0;
+    bottom: 0;
+}
+.share-btn {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.share-btn :deep(svg) {
+    display: block;
+}
+.share-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--text-muted);
+    color: var(--text-primary);
 }
 .menu__item:hover {
     background: var(--bg-elevated-hover);
@@ -231,7 +262,7 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
 /* ================= Пресет «Градиент»: как «Минимал», но с цветным фоном из правого нижнего угла ================= */
 .pnl--gradient {
     --pnl-tint: rgba(31, 199, 126, 0.22);
-    padding: var(--space-4) var(--space-5);
+    padding: var(--space-4) var(--card-padding);
     border: 0;
     box-shadow: none;
     border-radius: var(--radius-lg);
@@ -261,7 +292,7 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
     --pnl-color: var(--success);
     --pnl-glow: rgba(31, 199, 126, 0.16);
     --pnl-border: rgba(31, 199, 126, 0.35);
-    padding: var(--space-4) var(--space-5);
+    padding: var(--space-4) var(--card-padding);
     overflow: hidden;
     border-color: var(--pnl-border);
     background:

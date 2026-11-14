@@ -94,7 +94,7 @@ const orderColumns = [
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 16px 0 0;
+    margin: 8px 0 0;
 }
 .section-head h2 {
     margin: 0;

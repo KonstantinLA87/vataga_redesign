@@ -57,6 +57,9 @@
     --space-5: 24px;
     --space-6: 32px;
 
+    /* Внутренний отступ карточек (переводы, таблицы, PnL) */
+    --card-padding: 20px;
+
     /* Размеры раскладки */
     --header-height: 58px;
     --sidebar-width: 246px;

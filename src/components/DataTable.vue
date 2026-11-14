@@ -40,14 +40,14 @@ defineProps({
 
 <style scoped>
 .table-card {
-    padding: var(--space-5) 0 var(--space-2);
+    padding: var(--card-padding) 0 var(--space-2);
     overflow: hidden;
 }
 .table-card__head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 var(--space-5);
+    padding: 0 var(--card-padding);
     margin-bottom: var(--space-4);
 }
 .table-card__head h3 {
@@ -74,11 +74,11 @@ th {
 }
 th:first-child,
 td:first-child {
-    padding-left: var(--space-5);
+    padding-left: var(--card-padding);
 }
 th:last-child,
 td:last-child {
-    padding-right: var(--space-5);
+    padding-right: var(--card-padding);
 }
 .sort {
     vertical-align: middle;
