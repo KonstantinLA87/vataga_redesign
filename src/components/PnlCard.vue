@@ -5,6 +5,7 @@ import SkyPeek from './SkyPeek.vue'
 import Tooltip from './Tooltip.vue'
 import PnlPresetModal from './PnlPresetModal.vue'
 import PnlShareModal from './PnlShareModal.vue'
+import PnlVuMeter from './PnlVuMeter.vue'
 import { pnl } from '../data/mock.js'
 
 // Для проверки можно подставить своё число: ?pnl=-42.5
@@ -16,11 +17,12 @@ const pnlHint =
   'Виджет показывает чистый PnL за сутки. Обновляется при фиксации финреза (закрыта позиция или часть), ' +
   'списании комиссии, фандинга и пр. Результат сбрасывается при нажатии на кнопку со стрелкой'
 
-/* ---------- Пресет виджета: 'minimal' | 'gradient' | 'accent', запоминается в браузере ---------- */
+/* ---------- Пресет виджета: 'minimal' | 'vu' | 'accent', запоминается в браузере ---------- */
 const STORAGE_KEY = 'vataga.pnlPreset'
 function readPreset() {
   try {
-    return localStorage.getItem(STORAGE_KEY) || 'accent'
+    const v = localStorage.getItem(STORAGE_KEY)
+    return v === 'gradient' ? 'vu' : v || 'accent' // «Градиент» заменён на «Аналог»
   } catch {
     return 'accent'
   }
@@ -85,7 +87,10 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
         </Transition>
       </div>
     </div>
-    <div class="pnl__body">
+    <div v-if="preset === 'vu'" class="pnl__body">
+      <PnlVuMeter :value="toNum(value)" :text="(isUp ? '+' : '') + value" :unrealized="pnl.unrealized" />
+    </div>
+    <div v-else class="pnl__body">
       <div class="pnl__value" :class="isUp ? 'pos' : 'neg'">{{ isUp ? '+' : '' }}{{ value }}</div>
       <div class="pnl__unr neg">{{ pnl.unrealized }} Unr.</div>
     </div>
@@ -260,32 +265,42 @@ onUnmounted(() => document.removeEventListener('click', onDocClick))
     flex-direction: column;
 }
 
-/* ================= Пресет «Градиент»: как «Минимал», но с цветным фоном из правого нижнего угла ================= */
-.pnl--gradient {
-    --pnl-tint: rgba(31, 199, 126, 0.22);
-    padding: var(--space-4) var(--card-padding);
+/* ================= Пресет «Аналог»: металлическая панель с окошком стрелочного прибора ================= */
+.pnl--vu {
+    padding: 12px 14px 14px;
     border: 0;
-    box-shadow: none;
     border-radius: var(--radius-lg);
-    background: linear-gradient(to top left, var(--pnl-tint) 0%, transparent 70%);
+    background: linear-gradient(180deg, #9a9ea6 0%, #7c8089 45%, #666a73 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+        0 8px 24px rgba(0, 0, 0, 0.35);
 }
-.pnl--gradient.pnl--down {
-    --pnl-tint: rgba(242, 73, 92, 0.22);
+.pnl--vu .pnl__title,
+.pnl--vu .pnl__title :deep(svg),
+.pnl--vu .pnl__more {
+    color: #1f2228;
 }
-.pnl--gradient .pnl__body {
-    display: flex;
-    flex-direction: column;
+.pnl--vu .pnl__more:hover,
+.pnl--vu .pnl__more--on {
+    background: rgba(0, 0, 0, 0.12);
+    color: #000;
 }
-.pnl--gradient .pnl__value {
-    font-size: var(--fs-pnl);
-    letter-spacing: -0.02em;
-    margin-top: 10px;
+.pnl--vu .pnl__head {
+    margin-bottom: 8px;
 }
-.pnl--gradient .pnl__unr {
-    align-self: flex-start;
-    margin-top: 6px;
-    padding: 3px 8px;
-    border-radius: 6px;
+.pnl--vu .share-wrap {
+    right: 22px;
+    bottom: 22px;
+    z-index: 4;
+}
+.pnl--vu .share-btn {
+    border-color: rgba(43, 33, 22, 0.35);
+    color: #2b2116;
+}
+.pnl--vu .share-btn:hover {
+    background: rgba(43, 33, 22, 0.08);
+    color: #000;
 }
 
 /* ================= Пресет «Акцент»: рамка, свечение, солнце/луна ================= */

@@ -1,7 +1,7 @@
 <script setup>
 /*
  * Модалка выбора пресета виджета «Суточный PnL».
- * v-model — id выбранного пресета ('minimal' | 'gradient' | 'accent').
+ * v-model — id выбранного пресета ('minimal' | 'vu' | 'accent').
  */
 import { ref, watch, onMounted, onUnmounted } from "vue";
 import Icon from "./Icon.vue";
@@ -14,7 +14,7 @@ const emit = defineEmits(["update:modelValue", "close"]);
 
 const presets = [
     { id: "minimal", title: "Минимал", text: "Без карточки: только цифры на фоне страницы." },
-    { id: "gradient", title: "Градиент", text: "Как «Минимал», но с цветной подсветкой из правого нижнего угла." },
+    { id: "vu", title: "Аналог", text: "Окошко стрелочного прибора, как на ламповом компрессоре. Стрелка показывает PnL." },
     { id: "accent", title: "Акцент", text: "Карточка с цветной рамкой по знаку PnL, днём солнце, ночью луна." },
 ];
 
@@ -62,6 +62,7 @@ onUnmounted(() => document.removeEventListener("keydown", onKey));
                                 <div class="preview__value">+11.3</div>
                                 <div class="preview__unr">-759 Unr.</div>
                                 <span v-if="p.id === 'accent'" class="preview__sun"></span>
+                                <span v-if="p.id === 'vu'" class="preview__needle"></span>
                             </div>
                             <div class="option__meta">
                                 <span class="radio"><Icon v-if="draft === p.id" name="check" :size="12" /></span>
@@ -182,8 +183,50 @@ onUnmounted(() => document.removeEventListener("keydown", onKey));
     color: var(--danger-text);
     background: var(--danger-soft);
 }
-.preview--gradient {
-    background: linear-gradient(to top left, rgba(31, 199, 126, 0.25) 0%, transparent 70%);
+/* «Аналог»: серая панель, тёплое окошко, стрелка */
+.preview--vu {
+    align-items: center;
+    padding: 8px;
+    background: linear-gradient(180deg, #9a9ea6, #666a73);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.preview--vu::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: 3px;
+    background: radial-gradient(120% 110% at 50% 35%, #fbf0c9, #f0dca2 55%, #d8bf7c);
+    box-shadow: inset 0 2px 6px rgba(40, 25, 0, 0.5);
+}
+.preview--vu > * {
+    position: relative;
+}
+.preview--vu .preview__title {
+    margin-top: 6px;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #5a4a33;
+}
+.preview--vu .preview__value {
+    margin-top: 4px;
+    color: #1d1710;
+}
+.preview--vu .preview__unr {
+    align-self: center;
+    background: none;
+    color: #b3241b;
+}
+.preview__needle {
+    position: absolute !important;
+    left: 50%;
+    bottom: -18px;
+    width: 1.5px;
+    height: 96px;
+    background: #1a1410;
+    transform-origin: 50% 100%;
+    transform: rotate(18deg);
+    opacity: 0.85;
 }
 .preview--accent {
     align-items: center;
