@@ -174,6 +174,12 @@ onUnmounted(() => {
     border: 1px solid rgba(255, 92, 138, 0.35);
     border-radius: var(--radius-pill);
     background: var(--team-bg);
+    transition: 0.15s;
+
+    &:hover {
+      background: var(--team-bg-hover);
+      box-shadow: 0px 0px 20px rgba(255, 92, 138, 0.302);
+    }
 }
 .icon-btn {
     position: relative;

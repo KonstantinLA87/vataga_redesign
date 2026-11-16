@@ -41,6 +41,7 @@
     --badge-long-bg: var(--success-soft);
     --badge-short-bg: var(--danger-soft);
     --team-bg: rgba(255, 92, 138, 0.08);
+    --team-bg-hover: rgba(255, 92, 138, 0.245);
 
     --brand-team: #ff5c8a;
     --brand-logo: #873efe;
